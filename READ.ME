@@ -1,0 +1,70 @@
+# 3 Delete
+package NodeJs;
+
+
+import java.sql.Connection;
+
+import java.sql.DriverManager;
+
+import java.sql.SQLException;
+
+import java.sql.Statement;
+
+import java.util.Scanner;
+
+
+
+public class Delete {
+
+	public static void main(String[] args) {
+
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/nodejs", "root", "1234");
+
+                    Statement s = con.createStatement()) {
+
+
+
+
+                   Scanner sc = new Scanner(System.in);
+
+                   System.out.println("Delete Data from student table:");
+
+                   System.out.println("________________________________________");
+
+
+
+                   System.out.print("Enter student id: ");
+
+                   int sid = sc.nextInt();
+
+
+
+                   String deleteQuery = "DELETE FROM student WHERE s_id=" + sid;
+
+                   s.executeUpdate(deleteQuery);
+
+
+
+                   System.out.println("Data deleted successfully");
+
+
+
+               } catch (SQLException err) {
+
+                   System.out.println("ERROR: " + err);
+
+               }
+
+        } catch (ClassNotFoundException e) {
+
+            System.out.println("MySQL JDBC driver not found");
+
+        }
+
+    }
+
+}
